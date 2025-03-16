@@ -1,0 +1,5 @@
+.vscode
+CMakePresets.json
+out/
+personal_notes.md
+ricing_tool_binary
