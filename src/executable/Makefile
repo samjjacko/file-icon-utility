@@ -57,10 +57,10 @@ RM = /opt/homebrew/Cellar/cmake/3.30.5/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/samjackson/Desktop/dev/help_please
+CMAKE_SOURCE_DIR = /Users/samjackson/Desktop/dev/ricing_tool_project
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/samjackson/Desktop/dev/help_please
+CMAKE_BINARY_DIR = /Users/samjackson/Desktop/dev/ricing_tool_project
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,14 +87,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /Users/samjackson/Desktop/dev/help_please && $(CMAKE_COMMAND) -E cmake_progress_start /Users/samjackson/Desktop/dev/help_please/CMakeFiles /Users/samjackson/Desktop/dev/help_please/src/executable//CMakeFiles/progress.marks
-	cd /Users/samjackson/Desktop/dev/help_please && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/executable/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/samjackson/Desktop/dev/help_please/CMakeFiles 0
+	cd /Users/samjackson/Desktop/dev/ricing_tool_project && $(CMAKE_COMMAND) -E cmake_progress_start /Users/samjackson/Desktop/dev/ricing_tool_project/CMakeFiles /Users/samjackson/Desktop/dev/ricing_tool_project/src/executable//CMakeFiles/progress.marks
+	cd /Users/samjackson/Desktop/dev/ricing_tool_project && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/executable/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/samjackson/Desktop/dev/ricing_tool_project/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Users/samjackson/Desktop/dev/help_please && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/executable/clean
+	cd /Users/samjackson/Desktop/dev/ricing_tool_project && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/executable/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,39 +103,39 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Users/samjackson/Desktop/dev/help_please && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/executable/preinstall
+	cd /Users/samjackson/Desktop/dev/ricing_tool_project && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/executable/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Users/samjackson/Desktop/dev/help_please && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/executable/preinstall
+	cd /Users/samjackson/Desktop/dev/ricing_tool_project && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/executable/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /Users/samjackson/Desktop/dev/help_please && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/samjackson/Desktop/dev/ricing_tool_project && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
-src/executable/CMakeFiles/executable.dir/rule:
-	cd /Users/samjackson/Desktop/dev/help_please && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/executable/CMakeFiles/executable.dir/rule
-.PHONY : src/executable/CMakeFiles/executable.dir/rule
+src/executable/CMakeFiles/ricing_tool_binary.dir/rule:
+	cd /Users/samjackson/Desktop/dev/ricing_tool_project && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/executable/CMakeFiles/ricing_tool_binary.dir/rule
+.PHONY : src/executable/CMakeFiles/ricing_tool_binary.dir/rule
 
 # Convenience name for target.
-executable: src/executable/CMakeFiles/executable.dir/rule
-.PHONY : executable
+ricing_tool_binary: src/executable/CMakeFiles/ricing_tool_binary.dir/rule
+.PHONY : ricing_tool_binary
 
 # fast build rule for target.
-executable/fast:
-	cd /Users/samjackson/Desktop/dev/help_please && $(MAKE) $(MAKESILENT) -f src/executable/CMakeFiles/executable.dir/build.make src/executable/CMakeFiles/executable.dir/build
-.PHONY : executable/fast
+ricing_tool_binary/fast:
+	cd /Users/samjackson/Desktop/dev/ricing_tool_project && $(MAKE) $(MAKESILENT) -f src/executable/CMakeFiles/ricing_tool_binary.dir/build.make src/executable/CMakeFiles/ricing_tool_binary.dir/build
+.PHONY : ricing_tool_binary/fast
 
 main.o: main.cpp.o
 .PHONY : main.o
 
 # target to build an object file
 main.cpp.o:
-	cd /Users/samjackson/Desktop/dev/help_please && $(MAKE) $(MAKESILENT) -f src/executable/CMakeFiles/executable.dir/build.make src/executable/CMakeFiles/executable.dir/main.cpp.o
+	cd /Users/samjackson/Desktop/dev/ricing_tool_project && $(MAKE) $(MAKESILENT) -f src/executable/CMakeFiles/ricing_tool_binary.dir/build.make src/executable/CMakeFiles/ricing_tool_binary.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -143,7 +143,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	cd /Users/samjackson/Desktop/dev/help_please && $(MAKE) $(MAKESILENT) -f src/executable/CMakeFiles/executable.dir/build.make src/executable/CMakeFiles/executable.dir/main.cpp.i
+	cd /Users/samjackson/Desktop/dev/ricing_tool_project && $(MAKE) $(MAKESILENT) -f src/executable/CMakeFiles/ricing_tool_binary.dir/build.make src/executable/CMakeFiles/ricing_tool_binary.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -151,7 +151,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	cd /Users/samjackson/Desktop/dev/help_please && $(MAKE) $(MAKESILENT) -f src/executable/CMakeFiles/executable.dir/build.make src/executable/CMakeFiles/executable.dir/main.cpp.s
+	cd /Users/samjackson/Desktop/dev/ricing_tool_project && $(MAKE) $(MAKESILENT) -f src/executable/CMakeFiles/ricing_tool_binary.dir/build.make src/executable/CMakeFiles/ricing_tool_binary.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -162,7 +162,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... executable"
+	@echo "... ricing_tool_binary"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
@@ -177,6 +177,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /Users/samjackson/Desktop/dev/help_please && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/samjackson/Desktop/dev/ricing_tool_project && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

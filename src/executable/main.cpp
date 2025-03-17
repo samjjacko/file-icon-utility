@@ -36,13 +36,13 @@
 //     }
 // }
 
-// wxWidgets entry point
+// wxWidgets entry point - this is the GUI thread
 wxIMPLEMENT_APP(App);
 // main function 
 bool App::OnInit() {
     MainFrame *mainFrame = new MainFrame("C++ GUI");
     // "client size" refers to the inside of the window, not including the border
-    mainFrame->SetClientSize(800, 600); 
     mainFrame->Show(true);
     return true;
+
 }

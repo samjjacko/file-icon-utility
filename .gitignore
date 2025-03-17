@@ -3,3 +3,7 @@ CMakePresets.json
 out/
 personal_notes.md
 ricing_tool_binary
+.DS_Store
+.cache/
+CMakeFiles
+**/Makefile
