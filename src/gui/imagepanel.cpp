@@ -98,3 +98,19 @@ void wxImagePanel::OnSize(wxSizeEvent& event){
     //skip the event.
     event.Skip();
 }
+
+void wxImagePanel::updateImage(wxString file, wxBitmapType format) {
+    std::cout << file << std::endl;
+    if (!image.LoadFile(file, format)) {
+        wxLogError("Failed to load image: %s", file);
+        return;
+    } // loads the image just fine, but doesn't update the display
+    // w = image.GetWidth();
+    // h = image.GetHeight();
+    int tempw, temph;
+    GetClientSize(&tempw, &temph);
+    w = tempw; h = temph;
+    resized = wxBitmap(image.Scale(w, h, wxIMAGE_QUALITY_HIGH));
+    Refresh();
+    Update();
+}

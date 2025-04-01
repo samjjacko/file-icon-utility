@@ -12,7 +12,6 @@ OSIconInterface::OSIconInterface()
     impl = new Impl(); // need to initialize the Impl struct's pointer
     MacInterface* macCommands = [[MacInterface alloc] init]; 
     impl->intrfce = macCommands; 
-    printf("seems to be ok\n");
 }
 
 OSIconInterface::~OSIconInterface()
@@ -21,10 +20,10 @@ OSIconInterface::~OSIconInterface()
     delete impl;
 }
 // note that objc might have a weird bool that isn't c++ std
+// doubt it though
 bool OSIconInterface::setIconWithLocalImg(char *target_path, char* img_path)
 {
     return [impl->intrfce setFileIconWithLocalImg:target_path image_path:img_path];
-    // printf("yooo \n");
 }
 
 int OSIconInterface::setIconWithURL(char* target_path, char* img_url)

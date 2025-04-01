@@ -7,3 +7,4 @@ ricing_tool_binary
 .cache/
 CMakeFiles
 **/Makefile
+testing/
