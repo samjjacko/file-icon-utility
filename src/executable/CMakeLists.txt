@@ -10,7 +10,7 @@ target_include_directories(ricing_tool_binary
 target_link_libraries(ricing_tool_binary
     ricing_tool::objc_lib
     ricing_tool::gui
-    ${wxWidgets_LIBRARIES} # do i need to specify this twice??
+    ${wxWidgets_LIBRARIES} 
 )
 include(${wxWidgets_USE_FILE})
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)

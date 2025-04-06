@@ -75,17 +75,16 @@ void wxImagePanel::paintNow()
  */
 void wxImagePanel::render(wxDC&  dc)
 {
-    int neww, newh;
-    dc.GetSize( &neww, &newh );
-    
-    if( neww != w || newh != h )
-    {
-        resized = wxBitmap( image.Scale( neww, newh /*, wxIMAGE_QUALITY_HIGH*/ ) );
-        w = neww;
-        h = newh;
-        dc.DrawBitmap( resized, 0, 0, false );
-    }else{
-        dc.DrawBitmap( resized, 0, 0, false );
+    int panelSize = std::min(GetSize().GetWidth(), GetSize().GetHeight());
+
+    if (panelSize != w || panelSize != h) {
+        resized = wxBitmap(image.Scale(panelSize, panelSize, wxIMAGE_QUALITY_HIGH));
+        w = panelSize;
+        h = panelSize;
+    }
+
+    if (resized.IsOk()) {
+        dc.DrawBitmap(resized, 0, 0, false);
     }
 }
 
@@ -99,6 +98,7 @@ void wxImagePanel::OnSize(wxSizeEvent& event){
     event.Skip();
 }
 
+// image size doesn't seem to be determined here...
 void wxImagePanel::updateImage(wxString file, wxBitmapType format) {
     std::cout << file << std::endl;
     if (!image.LoadFile(file, format)) {

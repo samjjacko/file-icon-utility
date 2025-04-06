@@ -2,19 +2,9 @@
 #include <stdio.h>
 #import "../include/MacInterface.h"
 #import <Foundation/Foundation.h>
-/*
-    need to be able to 
-    1. set a file's icon with a local image
-    2. set a file's icon with a url
-    3. get desktop background image  
-    4. adjust an image's position and size relative to the icon to be displayed (look at NSImage stuff)
-    e.g. https://developer.apple.com/documentation/appkit/images-and-pdf?language=objc
-    this will mostly be to preview what the new icon will look like 
-    5. fetch the icon from an existing file
-*/
+
 @implementation MacInterface
     - (id)init { // dodgy constructor
-        NSLog(@"Constructor is called");
         return self;
     }
     - (NSString*)convertCharArray: (char*)cString {

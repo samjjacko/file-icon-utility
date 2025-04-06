@@ -9,32 +9,6 @@
 #include "../include/gui.hpp"
 #include <stdio.h>
 #include <stdlib.h>
-// placeholder code to check that objc/c++ interoperability works
-// int main(int argc, char* argv[]) {
-//     char* file_path = argv[1];
-//     char* img_url = argv[2];
-//     int option = atoi(argv[3]);
-//     OSIconInterface* intrfce = new OSIconInterface; 
-//     switch(option) {
-//         case 1:
-//             if(intrfce->setIconWithLocalImg(file_path, img_url)) {
-//                 printf("Icon set successfully!");
-//             } else {
-//                 printf("Icon not set successfully!");
-//             }
-//             return 0;
-//         case 2:
-//             if(intrfce->setIconWithURL(file_path, img_url)) {
-//                 printf("Icon set successfully!");
-//             } else {
-//                 printf("Icon not set successfully!");
-//             }
-//             return 0;
-//         default:
-//             printf("Invalid option! Supply either 1 or 2 as the third argument.\n");
-//             break;
-//     }
-// }
 
 // wxWidgets entry point - this is the GUI thread
 wxIMPLEMENT_APP(App);
