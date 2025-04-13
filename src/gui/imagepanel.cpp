@@ -130,3 +130,26 @@ void wxImagePanel::updateImage() {
     Refresh();
     Update();
 }
+
+unsigned char* wxImagePanel::GetRGBA() {
+    unsigned char* rgb_data = image.GetData();
+    unsigned char* alpha_data = image.GetAlpha();
+    // int pixelcount = image.GetHeight() * image.GetWidth()
+    int pixelcount = h * w;
+    unsigned char* RGBA = new unsigned char[pixelcount * 4];
+    int rgba_index;
+    int alpha_index;
+    for(int i = 0; i < pixelcount; i++) {
+        int rgba_index = 4 * i;
+        int rgb_index = 3 * i;
+        
+        // Copy RGB data
+        RGBA[rgba_index] = rgb_data[rgb_index];     // R
+        RGBA[rgba_index + 1] = rgb_data[rgb_index + 1]; // G
+        RGBA[rgba_index + 2] = rgb_data[rgb_index + 2]; // B
+        
+        // Set alpha channel
+        RGBA[rgba_index + 3] = alpha_data ? alpha_data[i] : 255;
+    }
+    return RGBA;
+}

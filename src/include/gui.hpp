@@ -18,7 +18,7 @@ public:
     void render(wxDC& dc);
     void updateImage(wxString file, wxBitmapType format);
     void updateImage();
-    
+    unsigned char* GetRGBA();
     // some useful events
     /*
      void mouseMoved(wxMouseEvent& event);

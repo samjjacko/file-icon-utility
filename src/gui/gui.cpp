@@ -86,6 +86,10 @@ void MainFrame::OnTintSlider(wxCommandEvent& e) {
         rgb[1] = grn_slider;
     } else if (ev_obj == grn_slider) {
         rgb[2] = blu_slider;
+    } else {
+        // tint amount slider changed
+        // repaint everything with new tint slider
+        rgb[0] = red_slider; rgb[1] = grn_slider; rgb[2] = blu_slider;
     }
 
     TintSetImg(rgb);
@@ -116,7 +120,7 @@ void MainFrame::TintSetImg(wxSlider* rgb[3]) {
         if(rgb[i] == NULL) {
             continue;
         } else {
-            int tint_amt = rgb[i]->GetValue();
+            int tint_amt = (int) (rgb[i]->GetValue() * tint_slider->GetValue() / 100);
             for (int y = 0; y < height; ++y) {
                 for (int x = 0; x < width; ++x) { // iterate through columns
                     int index = (y * width + x) * 3; // because R G B 
@@ -135,7 +139,6 @@ void MainFrame::TintSetImg(wxSlider* rgb[3]) {
     img_panel->image.SetData(datacpy);
     img_panel->image.SetAlpha(alphacpy); // probably slow
     img_panel->updateImage();
-    int* x = NULL;
 }
 
 // void tintloop(wxSlider* rgb[3], unsigned char* data, unsigned char* alpha, int height, int width) {
@@ -291,14 +294,27 @@ void MainFrame::GetImagePath(wxCommandEvent& e) {
 // not from the path. 
 void MainFrame::SetIcon(wxCommandEvent& e) {
     OSIconInterface* intrfce = new OSIconInterface; // should probably make this an instance variable
+    // set with bitmap stored in img_panel instead...?
+    unsigned char* RGBA_bitmap = img_panel->GetRGBA();
+    int width = img_panel->image.GetWidth();
+    int height = img_panel->image.GetHeight();
     for(int i = 0; i < file_paths.GetCount(); i++) {
-        if(intrfce->setIconWithLocalImg((char*)(const char*)file_paths[i], (char*)(const char*)icon_path.mb_str())) {
+        // if(intrfce->setIconWithLocalImg((char*)(const char*)file_paths[i], (char*)(const char*)icon_path.mb_str())) {
+        //     printf("Icon set successfully!");
+        // } else {
+        //     printf("Icon not set successfully!");
+        //     return;
+        // }
+        // seems to be doing something... but not exactly what i want... close though
+        if(intrfce->setIconWithBitmap((char*)(const char*)file_paths[i], &RGBA_bitmap, height, width)) {
             printf("Icon set successfully!");
         } else {
             printf("Icon not set successfully!");
             return;
         }
+
     }
+    delete[] RGBA_bitmap;
 }
 
 void MainFrame::SetSliders(wxCommandEvent& e) {
@@ -310,4 +326,5 @@ void MainFrame::SetSliders(wxCommandEvent& e) {
     wxSlider* temp[3] = {red_slider, grn_slider, blu_slider};
     TintSetImg(temp);
 }
+
 

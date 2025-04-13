@@ -9,7 +9,7 @@ struct OSIconInterface::Impl
 
 OSIconInterface::OSIconInterface()
 {
-    impl = new Impl(); // need to initialize the Impl struct's pointer
+    impl = new Impl(); // need to initialize the Implementation struct's pointer
     MacInterface* macCommands = [[MacInterface alloc] init]; 
     impl->intrfce = macCommands; 
 }
@@ -19,8 +19,6 @@ OSIconInterface::~OSIconInterface()
     [impl->intrfce release];
     delete impl;
 }
-// note that objc might have a weird bool that isn't c++ std
-// doubt it though
 bool OSIconInterface::setIconWithLocalImg(char *target_path, char* img_path)
 {
     return [impl->intrfce setFileIconWithLocalImg:target_path image_path:img_path];
@@ -33,4 +31,8 @@ int OSIconInterface::setIconWithURL(char* target_path, char* img_url)
 const char* OSIconInterface::fetchDtopImgURL() 
 {
     return [impl->intrfce fetchDesktopImgURL];
+}
+// bool setIconWithBitmap(char* target_path, unsigned char** bitmap_data, int height, int width);
+bool OSIconInterface::setIconWithBitmap(char* target_path, unsigned char** bitmap_data, int h, int w) {
+    return [impl->intrfce setFileIconWithBitmap:target_path bitmapData:bitmap_data height:h width:w];
 }

@@ -48,4 +48,45 @@
         return [urlstring cStringUsingEncoding:NSUTF8StringEncoding];
         // return [NSString string];
     }
+- (bool)setFileIconWithBitmap:(char*)target_path 
+                   bitmapData:(unsigned char**)bitmap_data 
+                       height:(int)height 
+                        width:(int)width {
+    // Convert the target path to NSString
+    NSString* NStarget_path = [self convertCharArray:target_path];
+    
+    // Create an NSBitmapImageRep from the raw bitmap data
+    NSBitmapImageRep* bm_img = [[NSBitmapImageRep alloc]
+        initWithBitmapDataPlanes:bitmap_data
+                      pixelsWide:width
+                      pixelsHigh:height
+                   bitsPerSample:8
+                 samplesPerPixel:4 // Assuming RGBA (4 channels)
+                        hasAlpha:YES
+                        isPlanar:NO
+                  colorSpaceName:NSDeviceRGBColorSpace
+                     bytesPerRow:width * 4
+                    bitsPerPixel:32];
+
+    if (!bm_img) {
+        NSLog(@"Failed to create NSBitmapImageRep from bitmap data.");
+        return false;
+    }
+
+    // Create an NSImage and add the bitmap representation
+    NSImage* iconImage = [[NSImage alloc] init];
+    [iconImage addRepresentation:bm_img];
+
+    // Set the icon for the file
+    bool success = [[NSWorkspace sharedWorkspace]
+        setIcon:iconImage
+        forFile:NStarget_path
+        options:0];
+
+    // Clean up
+    [bm_img release];
+    [iconImage release];
+
+    return success;
+}
 @end
