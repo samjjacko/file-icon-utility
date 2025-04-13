@@ -14,7 +14,7 @@
 wxIMPLEMENT_APP(App);
 // main function 
 bool App::OnInit() {
-    MainFrame *mainFrame = new MainFrame("C++ GUI");
+    MainFrame *mainFrame = new MainFrame("File Icon Utility");
     // "client size" refers to the inside of the window, not including the border
     mainFrame->Show(true);
     return true;
