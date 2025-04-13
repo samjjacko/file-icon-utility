@@ -33,6 +33,6 @@ const char* OSIconInterface::fetchDtopImgURL()
     return [impl->intrfce fetchDesktopImgURL];
 }
 // bool setIconWithBitmap(char* target_path, unsigned char** bitmap_data, int height, int width);
-bool OSIconInterface::setIconWithBitmap(char* target_path, unsigned char** bitmap_data, int h, int w) {
+bool OSIconInterface::setIconWithBitmap(char* target_path, unsigned char* bitmap_data, int h, int w) {
     return [impl->intrfce setFileIconWithBitmap:target_path bitmapData:bitmap_data height:h width:w];
 }

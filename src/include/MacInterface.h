@@ -7,7 +7,7 @@
     - (bool)setFileIconWithUrl: (char*)target_path image_url:(char*)img_url;
     - (const char*)fetchDesktopImgURL;
     - (bool)setFileIconWithBitmap:(char*)target_path
-        bitmapData:(unsigned char**)bitmap_data 
+        bitmapData:(unsigned char*)bitmap_data 
         height:(int)height 
         width:(int)width;
     // do i store an image as a char array??? need to watch more of that handy image

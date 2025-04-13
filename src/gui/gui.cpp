@@ -306,7 +306,7 @@ void MainFrame::SetIcon(wxCommandEvent& e) {
         //     return;
         // }
         // seems to be doing something... but not exactly what i want... close though
-        if(intrfce->setIconWithBitmap((char*)(const char*)file_paths[i], &RGBA_bitmap, height, width)) {
+        if(intrfce->setIconWithBitmap((char*)(const char*)file_paths[i], RGBA_bitmap, height, width)) {
             printf("Icon set successfully!");
         } else {
             printf("Icon not set successfully!");

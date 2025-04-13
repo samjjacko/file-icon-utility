@@ -49,44 +49,73 @@
         // return [NSString string];
     }
 - (bool)setFileIconWithBitmap:(char*)target_path 
-                   bitmapData:(unsigned char**)bitmap_data 
+                   bitmapData:(unsigned char*)bitmap_data 
                        height:(int)height 
                         width:(int)width {
     // Convert the target path to NSString
     NSString* NStarget_path = [self convertCharArray:target_path];
     
-    // Create an NSBitmapImageRep from the raw bitmap data
-    NSBitmapImageRep* bm_img = [[NSBitmapImageRep alloc]
-        initWithBitmapDataPlanes:bitmap_data
-                      pixelsWide:width
-                      pixelsHigh:height
-                   bitsPerSample:8
-                 samplesPerPixel:4 // Assuming RGBA (4 channels)
-                        hasAlpha:YES
-                        isPlanar:NO
-                  colorSpaceName:NSDeviceRGBColorSpace
-                     bytesPerRow:width * 4
-                    bitsPerPixel:32];
-
-    if (!bm_img) {
-        NSLog(@"Failed to create NSBitmapImageRep from bitmap data.");
+    if (!bitmap_data || width <= 0 || height <= 0) {
+        NSLog(@"Invalid bitmap data or dimensions");
         return false;
     }
-
-    // Create an NSImage and add the bitmap representation
-    NSImage* iconImage = [[NSImage alloc] init];
-    [iconImage addRepresentation:bm_img];
-
+    
+    NSLog(@"Creating icon with dimensions: %dx%d", width, height);
+    
+    // Create a CGDataProvider from the raw data
+    CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, bitmap_data, width * height * 4, NULL);
+    
+    // Create a CGColorSpace for RGBA
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    
+    // Create a CGImage from the data
+    CGImageRef cgImage = CGImageCreate(width,
+                                      height,
+                                      8,  // bits per component
+                                      32, // bits per pixel
+                                      width * 4, // bytes per row
+                                      colorSpace,
+                                      kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big,
+                                      provider,
+                                      NULL,
+                                      NO,
+                                      kCGRenderingIntentDefault);
+    
+    if (!cgImage) {
+        NSLog(@"Failed to create CGImage");
+        CGColorSpaceRelease(colorSpace);
+        CGDataProviderRelease(provider);
+        return false;
+    }
+    
+    // Create NSImage from CGImage
+    NSImage* iconImage = [[NSImage alloc] initWithCGImage:cgImage size:NSMakeSize(width, height)];
+    
+    if (!iconImage) {
+        NSLog(@"Failed to create NSImage");
+        CGImageRelease(cgImage);
+        CGColorSpaceRelease(colorSpace);
+        CGDataProviderRelease(provider);
+        return false;
+    }
+    
+    // Scale to standard icon size
+    [iconImage setSize:NSMakeSize(1024, 1024)];
+    
     // Set the icon for the file
     bool success = [[NSWorkspace sharedWorkspace]
         setIcon:iconImage
         forFile:NStarget_path
         options:0];
-
+    
+    NSLog(@"Icon set %@", success ? @"successfully" : @"failed");
+    
     // Clean up
-    [bm_img release];
+    CGImageRelease(cgImage);
+    CGColorSpaceRelease(colorSpace);
+    CGDataProviderRelease(provider);
     [iconImage release];
-
+    
     return success;
 }
 @end

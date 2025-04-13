@@ -134,11 +134,18 @@ void wxImagePanel::updateImage() {
 unsigned char* wxImagePanel::GetRGBA() {
     unsigned char* rgb_data = image.GetData();
     unsigned char* alpha_data = image.GetAlpha();
-    // int pixelcount = image.GetHeight() * image.GetWidth()
-    int pixelcount = h * w;
+    
+    // Get actual image dimensions
+    int actual_width = image.GetWidth();
+    int actual_height = image.GetHeight();
+    
+    // Use actual dimensions instead of panel dimensions
+    int pixelcount = actual_width * actual_height;
     unsigned char* RGBA = new unsigned char[pixelcount * 4];
-    int rgba_index;
-    int alpha_index;
+    
+    // printf("Image dimensions: %dx%d\n", actual_width, actual_height);
+    // printf("Panel dimensions: %dx%d\n", w, h);
+    
     for(int i = 0; i < pixelcount; i++) {
         int rgba_index = 4 * i;
         int rgb_index = 3 * i;
@@ -148,8 +155,20 @@ unsigned char* wxImagePanel::GetRGBA() {
         RGBA[rgba_index + 1] = rgb_data[rgb_index + 1]; // G
         RGBA[rgba_index + 2] = rgb_data[rgb_index + 2]; // B
         
-        // Set alpha channel
-        RGBA[rgba_index + 3] = alpha_data ? alpha_data[i] : 255;
+        // Handle alpha channel
+        if (alpha_data) {
+            RGBA[rgba_index + 3] = alpha_data[i];
+        } else {
+            RGBA[rgba_index + 3] = 255; // Fully opaque if no alpha
+        }
     }
+    
+    // // Verify first and last pixel
+    // printf("First pixel RGBA: %d,%d,%d,%d\n", 
+    //        RGBA[0], RGBA[1], RGBA[2], RGBA[3]);
+    // printf("Last pixel RGBA: %d,%d,%d,%d\n", 
+    //        RGBA[(pixelcount-1)*4], RGBA[(pixelcount-1)*4+1], 
+    //        RGBA[(pixelcount-1)*4+2], RGBA[(pixelcount-1)*4+3]);
+    
     return RGBA;
 }
