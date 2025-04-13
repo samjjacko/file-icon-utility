@@ -84,7 +84,7 @@ void wxImagePanel::render(wxDC&  dc)
     }
 
     if (resized.IsOk()) {
-        dc.DrawBitmap(resized, 0, 0, false);
+        dc.DrawBitmap(resized, 0, 0, true);
     }
 }
 
@@ -105,11 +105,27 @@ void wxImagePanel::updateImage(wxString file, wxBitmapType format) {
         wxLogError("Failed to load image: %s", file);
         return;
     } // loads the image just fine, but doesn't update the display
+    if (!image.HasAlpha()) {
+        image.InitAlpha(); // Init alpha channel if curr // don't do this every time!
+    }
     // w = image.GetWidth();
     // h = image.GetHeight();
     int tempw, temph;
     GetClientSize(&tempw, &temph);
-    w = tempw; h = temph;
+    w = tempw; h = temph; // for future rescaling events
+    resized = wxBitmap(image.Scale(w, h, wxIMAGE_QUALITY_HIGH));
+    Refresh();
+    Update();
+} // can i overload this method
+
+void wxImagePanel::updateImage() {
+    /*
+        Updates the image after new data is written 
+        to the image panel
+    */
+    int tempw, temph;
+    GetClientSize(&tempw, &temph);
+    w = tempw; h = temph; // for future rescaling events
     resized = wxBitmap(image.Scale(w, h, wxIMAGE_QUALITY_HIGH));
     Refresh();
     Update();
